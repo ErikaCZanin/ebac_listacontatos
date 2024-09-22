@@ -1,67 +1,66 @@
 const form = document.getElementById('form-atividade');
-const imgAprovado = `<img src="./images/aprovado.png" alt="Emoji celebrando"/>`
-const imgReprovado = `<img src="./images/reprovado.png" alt="Emoji decepcionado"/>`
-const atividades = []
-const notas = []
-const spanAprovado = `<span class="resultado aprovado">Aprovado</span>`
-const spanReprovado = `<span class="resultado reprovado">Reprovado</span>`
-const notaMinima = parseFloat(prompt('Digite a nota minima: '))
+const imgContact = `<img src="./images/est.png" alt="Emoji celebrando"/>`;
+const contatos = [];
 
 let linhas = ``;
 
-form.addEventListener('submit',function(e){
+form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    addLinha()
-    atTabela()
-    atMediaFnal()
-}
-)
+    addLinha();
+    atTabela();
+    atContatos();
+});
 
 function addLinha() {
-    const inputNomeAtividade = document.getElementById('nmAtividade');
-    const inputNotaAtividade = document.getElementById('ntAtividade');
+    const inputnmContact = document.getElementById('nmContact');
+    const inputemContact = document.getElementById('emContact');
+    const inputContatoPrincipal = document.getElementById('principalContato');
+    const inputtelContact = document.getElementById('telContact');
+    const inputUrl = document.getElementById('linkContact');
 
-    if (atividades.includes(inputNomeAtividade.value)) {
-        alert(`A atividade =: ${inputNomeAtividade.value} já foi inseridaa`)
+    if (contatos.some(contato => contato.nome === inputnmContact.value)) {
+        alert(`O contato ${inputnmContact.value} já está cadastrado`);
     } else {
+        const novoContato = {
+            nome: inputnmContact.value,
+            email: inputemContact.value,
+            telefone: inputtelContact.value,
+            url: inputUrl.value,
+            favorito: inputContatoPrincipal.checked
+        };
 
-    atividades.push(inputNomeAtividade.value)
-    notas.push(parseFloat(inputNotaAtividade.value))
+        contatos.push(novoContato);
 
-    let linha = '<tr>';
-    linha += `<td>${inputNomeAtividade.value}</td>`
-    linha += `<td>${inputNotaAtividade.value}</td>`
-    linha += `<td>${inputNotaAtividade.value >= notaMinima ? imgAprovado : imgReprovado}</td>`
-    linha += `</tr>`
+        let linha = '<tr>';
+        if (inputUrl.value) {
+            linha += `<td><img src="${inputUrl.value}" alt="Imagem do contato" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"></td>`;
+        } else {
+            linha += `<td></td>`; 
+        }
+        linha += `<td>${inputnmContact.value}</td>`;
+        linha += `<td>${inputemContact.value}</td>`;
+        linha += `<td>${inputtelContact.value}</td>`;
+        linha += `<td>${inputContatoPrincipal.checked ? imgContact : ''}</td>`; 
+        linha += `</tr>`;
 
-    linhas += linha;
+        linhas += linha; 
+        
+        inputnmContact.value = '';
+        inputemContact.value = '';
+        inputtelContact.value = '';
+        inputUrl.value = '';
+        inputContatoPrincipal.checked = false;
+    }
 }
 
-    inputNomeAtividade.value ='';
-    inputNotaAtividade.value = '';
-}
 
 function atTabela() {
-    const corpoTabela = document.querySelector('tbody')
-    corpoTabela.innerHTML =linhas;
+    const corpoTabela = document.querySelector('tbody');
+    corpoTabela.innerHTML = linhas;
 }
 
-function atMediaFnal() {
-   const mediaFinal = calculaMediaFinal()
-   
-   document.getElementById('mediaFinal-valor').innerHTML = mediaFinal.toFixed(2)
-   document.getElementById('mediaFinal-resultado').innerHTML = mediaFinal >= notaMinima ? spanAprovado : spanReprovado
-
-}
-
-function calculaMediaFinal () {
-    let somaNotas = 0;
-
-    for (let i = 0; i < notas.length; i++){
-     somaNotas += notas[i]
-    }
- 
-    return somaNotas / notas.length
-
+function atContatos() {
+    const totalContatos = contatos.length;
+    document.getElementById('totatContact').innerHTML = totalContatos;
 }

@@ -3,35 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de médias</title>
+    <title>Lista de contatos</title>
     <link rel="stylesheet" href="./main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wdth,wght@0,75..100,800;1,75..100,800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="./images/logo.png" alt="capela e diploma">
-            <h1>Calculadora de média</h1>
+            <img src="./images/contact.png" alt="icone de uma agenda">
+            <h1>Lista de contatos</h1>
         </header>
-        <form id="form-atividade">
-            <input type="text" name="name-atividade" id="nmAtividade" required placeholder="Nome da atividade">
-            <input type="number" name="nota-atividade" id="ntAtividade" required placeholder="Nota da atividade" min="0" max="10">
+        <form  id="form-atividade">
+            <input type="text" name="name-contact" id="nmContact" required placeholder="Nome do contato" alt="preencha com o nome do contato">
+            <input type="email" name="email-contact" id="emContact" required placeholder="E-mail do contato" alt="preencha com o e-mail do contato">
+            <input type="tel" name="tel-contact" id="telContact" required placeholder="Telefone do contato" alt="preencha com o telefone do contato">
+            <input type="url" name="link-contact" id="linkContact" placeholder="URL imagem (opcional)" alt="anexe o link da imagem">
+            <div>
+                <label>
+                    <input type="checkbox" name="principalContato" value="sim" id="principalContato" alt="confirme se é contato principal"> Marcar como principal
+                </label>
+            </div>
+            <div class="insert-contatos">
             <button type="submit">Adicionar</button>
+        </div>
         </form>
         <table cellspacing="0">
             <thead>
                 <tr>
-                    <th>Nome da atividade</th>
-                    <th>Nota da atividade</th>
-                    <th>Aprovado?</th>
+                    <th>Foto</th>
+                    <th>Nome do contato</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Favorito</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
             <tfoot>
                 <tr>
-                    <td>Média Final</td>
-                    <td id="mediaFinal-valor">---</td>
-                    <td id="mediaFinal-resultado">---</td>
+                    <td><b>Total contatos<b></td>
+                    <td id="totatContact">---</td>
                 </tr>
             </tfoot>
         </table>
